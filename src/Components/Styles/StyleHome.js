@@ -3,6 +3,11 @@ import { StyleSheet, Dimensions } from 'react-native';
 let { width, height } = Dimensions.get('window');
 
 export const Info = StyleSheet.create({
+    LinearGradient: {
+        flex: 1, alignItems: 'center',
+        justifyContent: 'center',
+    },
+
     container: {
         flex: 1,
         alignItems: 'center',
@@ -42,13 +47,9 @@ export const Info = StyleSheet.create({
         backgroundColor: 'transparent'
     },
 
-    Des: {
-        marginTop: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
 
     DesText: {
+        marginTop: 20,
         fontSize: 12,
         color: '#959595',
         backgroundColor: 'transparent',
@@ -70,6 +71,28 @@ export const Info = StyleSheet.create({
 });
 
 export const Home = StyleSheet.create({
+    ListItemLeft: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    nameUser: {
+        marginLeft: 0,
+        color: '#959595',
+        fontSize: 12,
+        fontWeight: 'bold',
+        textDecorationLine: 'underline'
+    },
+
+    textReview: {
+        fontSize: 10, marginTop: 2, 
+        textDecorationLine: 'underline' 
+    },
+
+    textDistric: {
+        fontSize: 15, fontWeight: 'bold', marginTop: 5
+    },
 
     getOff: {
         width: width - 30,
@@ -704,8 +727,8 @@ export const Message = StyleSheet.create({
     },
 
     numberBadge: {
-        fontSize: 9, 
-        color: 'white', 
+        fontSize: 9,
+        color: 'white',
         marginLeft: -1
     },
 
@@ -716,7 +739,7 @@ export const Message = StyleSheet.create({
     fontSize: { fontSize: 9 },
 
     timeDate: {
-        fontSize: 10, fontWeight: 'bold', marginTop: 15 
+        fontSize: 10, fontWeight: 'bold', marginTop: 15
     }
 
 

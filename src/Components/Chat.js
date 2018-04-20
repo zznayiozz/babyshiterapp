@@ -24,6 +24,7 @@ import { Chat as styles } from './Styles/StyleHome';
 let { width, height } = Dimensions.get('window');
 
 export default class Chat extends React.Component {
+   
     render() {
         return (
             <Container>

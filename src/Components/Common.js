@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Image, Dimensions } from 'react-native';
+import { StyleSheet, View, Image, Dimensions, TouchableOpacity, TextInput } from 'react-native';
 import { Header, Text, Body, Icon, Button, Left, Right, Title, Footer, FooterTab, Thumbnail } from 'native-base';
 
 let { width } = Dimensions.get('window');
@@ -66,3 +66,27 @@ export class Footers extends React.Component {
         )
     }
 }
+
+export class ButtonSlider extends React.Component {
+    render() {
+        return (
+            <TouchableOpacity onPress={this.props._onPress}
+                hitSlop={{ top: 10, bottom: 10, left: 0, right: 0 }}>
+                {this.props.children}
+            </TouchableOpacity>
+        )
+    }
+}
+
+export class Input extends React.Component {
+    render() {
+        return (
+            <TextInput
+                underlineColorAndroid='transparent'
+                placeholder={this.props.placeholder} 
+                style={this.props.style}/>
+        )
+    }
+}
+
+

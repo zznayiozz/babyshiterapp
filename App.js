@@ -1,7 +1,6 @@
 import React from 'react';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import { Icon } from 'native-base';
-
 import Info from './src/Components/Info';
 import Home from './src/Components/Home';
 import Message from './src/Components/Message';
@@ -16,13 +15,15 @@ import SignUp from './src/Components/SignUp';
 import Chat from './src/Components/Chat';
 import Congratulations from './src/Components/Congratulations';
 
+import { Provider } from 'react-redux'
+import  store  from './src/redux/store';
+
 let TabNavigatorConfigs = TabNavigator(
 	{
 		screenHome: { screen: Home },
 		screenMessage: { screen: Message },
 		screenSchedule: { screen: Schedule },
 		screenMe: { screen: Me },
-		
 	},
 	{
 		tabBarPosition: 'bottom',
@@ -37,8 +38,8 @@ let TabNavigatorConfigs = TabNavigator(
 				backgroundColor: '#f5f3f3',
 				height: 55,
 			},
-			iconStyle : {
-				width: 50, height: 50 ,
+			iconStyle: {
+				width: 50, height: 50,
 				justifyContent: 'center',
 				marginTop: -10
 			},
@@ -50,6 +51,7 @@ let TabNavigatorConfigs = TabNavigator(
 );
 
 let routerConfigs = {
+
 	screenInfo: { screen: Info },
 	screenSearch: { screen: Search },
 	screenResult: { screen: Result },
@@ -60,40 +62,39 @@ let routerConfigs = {
 	screenConPayDeposit: { screen: PayDeposit },
 	screenChat: { screen: Chat },
 	screenHome: { screen: TabNavigatorConfigs },
-	
+
 };
 
 let navigationOption = {
-	navigationOptions : {
+	navigationOptions: {
 		header: null,
-		headerTitleStyle: { color: '#274d7a', flex: 1, textAlign: 'center', alignSelf: 'center'},
-		headerStyle: {backgroundColor: "#f5f3f3"},
-		
+		headerTitleStyle: { color: '#274d7a', flex: 1, textAlign: 'center', alignSelf: 'center' },
+		headerStyle: { backgroundColor: "#f5f3f3" },
+
 	}
 };
 
 const Routers = StackNavigator(routerConfigs, navigationOption);
 export default class App extends React.Component {
 	constructor(props) {
-        super(props);
-        this.state = {
-            isFont: true,
-        }
+		super(props);
+		this.state = {
+			isFont: true,
+		}
 	}
 	async componentWillMount() {
-        await Expo.Font.loadAsync({
-            'Roboto': require('native-base/Fonts/Roboto.ttf'),
-            'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-        });
-        this.setState({ isFont: false });
-    };
+		await Expo.Font.loadAsync({
+			'Roboto': require('native-base/Fonts/Roboto.ttf'),
+			'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+		});
+		this.setState({ isFont: false });
+	};
 	render() {
-        if (this.state.isFont) { return <Expo.AppLoading /> }
-        return (<Routers />);
-    }
+		if (this.state.isFont) { return <Expo.AppLoading /> }
+		return (
+			<Provider store={store} >
+				<Routers />
+			</Provider>
+		);
+	}
 }
-
-
-
-
-

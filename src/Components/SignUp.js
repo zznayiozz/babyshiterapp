@@ -12,7 +12,7 @@ import {
 import { Button, Header, CheckBox, Icon } from 'native-base';
 import { LinearGradient } from 'expo';
 import { SignUp as styles } from './Styles/StyleHome';
-
+import { Input } from './Common';
 let { width, height } = Dimensions.get('window');
 
 export default class SignUp extends React.Component {
@@ -21,16 +21,6 @@ export default class SignUp extends React.Component {
         this.state = {
             isCheckBox: false
         }
-    }
-
-    TextInputElm = (placeholder) => {
-        return (
-            <TextInput
-                underlineColorAndroid={0}
-                placeholder={placeholder}
-                style={styles.Form}
-            />
-        )
     }
 
     render() {
@@ -64,15 +54,13 @@ export default class SignUp extends React.Component {
                     <Text style={styles.TextWelcome}>Welcome to Lmiee !</Text>
 
                     <View style={{ marginTop: 20 }}>
+                        <Input placeholder='Name' style={styles.Form} />
+                        <Input placeholder='Email Address' style={styles.Form} />
+                        <Input placeholder='Phone Number' style={styles.Form} />
 
-                        {this.TextInputElm('Name')}
-                        {this.TextInputElm('Email Address')}
-                        {this.TextInputElm('Phone Number')}
-                     
                         <View style={styles.checkBox}>
                             <CheckBox checked={this.state.isCheckBox} style={{ marginLeft: -10 }}
-                                onPress={() => { this.setState({ isCheckBox: !this.state.isCheckBox }) }}
-                            />
+                                onPress={() => { this.setState({ isCheckBox: !this.state.isCheckBox }) }} />
                             <Text style={styles.checkText}>I agree with terms & Privacy</Text>
                         </View>
 

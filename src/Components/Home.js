@@ -1,26 +1,19 @@
 import React from 'react';
 import { Image, Dimensions, StyleSheet, Easing, StatusBar, View } from 'react-native';
 import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body, Icon, Card, CardItem, Grid, Row, Button, Footer, Left, H3, Right, Title } from 'native-base';
-import { ListItems } from './../Mockdata/index';
+
 import { Headers } from './Common';
-import Expo from "expo";
 import { Home as styles } from './Styles/StyleHome';
 import Rating from 'react-native-rating'
+import { connect } from 'react-redux';
+import { actionToggleList } from './../redux/Action/index';
 
 let { width, height } = Dimensions.get('window');
-
 const images = {
     starFilled: require('../../assets/star_filled.png'),
     starUnfilled: require('../../assets/star_unfilled.png')
 }
-export default class Home extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            key: 3,
-            isMore: 'See more'
-        }
-    }
+class Home extends React.Component {
 
     static navigationOptions = {
         tabBarLabel: "Home",
@@ -30,18 +23,16 @@ export default class Home extends React.Component {
         },
     };
 
-    async componentWillMount() {
-        await this.listItem(ListItems);
-    };
-
-    listItem = (ListItems) => {
+    listItem = () => {
+        let { ListItems, isNumber } = this.props.contentHome;
+        let Toggle = (isNumber) ? 3 : 9;
         let items = ListItems.map((val, key) => {
-            if (key <= this.state.key) {
+            if (key <= Toggle) {
                 return (
-                    <ListItem avatar  key={key} style={styles.ListItems} onPress={() => this.props.navigation.navigate('screenSignUp')}>
-                        <Left style={{ flexDirection: 'column', justifyContent: 'center',  alignItems: 'center' }}>
+                    <ListItem avatar key={key} style={styles.ListItems} onPress={() => this.props.navigation.navigate('screenSignUp')}>
+                        <Left style={styles.ListItemLeft}>
                             <Thumbnail small source={val.thmbanil} style={{ width: 50, height: 50, }} />
-                            <Text style={{ marginLeft: 0, color: '#959595', fontSize: 12, fontWeight: 'bold', textDecorationLine: 'underline'}}>Minh</Text>
+                            <Text style={styles.nameUser}>{val.name}</Text>
                         </Left>
                         <Body style={{ borderBottomWidth: 0, paddingTop: 0, paddingBottom: 0, }}>
                             <Rating
@@ -61,20 +52,14 @@ export default class Home extends React.Component {
                                     marginRight: 5
                                 }}
                             />
-                            <Text note style={{ fontSize: 10, marginTop: 2, textDecorationLine: 'underline' }}>600 reviews</Text>
-                            <Text note style={{ fontSize: 15, fontWeight: 'bold', marginTop: 5 }}>Distric 1, HCMC</Text>
+                            <Text note style={styles.textReview}>{val.review}</Text>
+                            <Text note style={styles.textDistric}>{val.note}</Text>
                         </Body>
                     </ListItem>
                 )
             }
         });
         return items;
-    }
-
-    handleSeeMore = () => {
-        (this.state.key === 3) ? 
-        this.setState({key: 9,isMore: 'View short'}) : 
-        this.setState({key: 3,isMore: 'See More'})
     }
 
     TopTen = (text) => (
@@ -86,9 +71,11 @@ export default class Home extends React.Component {
         </Button>
     );
 
+    isMoreList = () => { this.props.isMoreList(); }
+
     ButtonMore = (text) => (
         <Button transparent style={{ alignSelf: 'center', marginTop: -10 }}
-            onPress={() => this.handleSeeMore()}>
+            onPress={() => this.isMoreList()}>
             <Text style={styles.ButtonMore} uppercase={false}> {text} </Text>
         </Button>
     );
@@ -101,7 +88,7 @@ export default class Home extends React.Component {
         </Button>
     );
 
-    render() { 
+    render() {
         return (
             <Container>
                 <StatusBar hidden={true} />
@@ -121,8 +108,8 @@ export default class Home extends React.Component {
                     {this.TopTen('Top 10 Shitter in HCMC')}
 
                     <List style={styles.buttonContainer}>
-                        {this.listItem(ListItems)}
-                        {this.ButtonMore(this.state.isMore)}
+                        {this.listItem()}
+                        {this.ButtonMore(this.props.contentHome.isMore)}
                     </List>
 
                     {this.ButtonSearch()}
@@ -130,8 +117,14 @@ export default class Home extends React.Component {
             </Container>
         );
     }
-
-    
-
 }
 
+const mapStateToProps = (state) => ({ contentHome: state.contentHome })
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    isMoreList: () => {
+        dispatch(actionToggleList());
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
