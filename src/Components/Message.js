@@ -1,20 +1,24 @@
 import React from 'react';
 import { View, Image } from 'react-native';
 import { Container, Content, Icon, Text, Header, List, ListItem, Left, Body, Right, Thumbnail, Badge, Button, Title } from 'native-base';
-import { ListItems } from './../Mockdata/index';
 import { Headers } from './Common';
 import { Message as styles } from './Styles/StyleHome';
+import { connect } from 'react-redux';
+import { actionNavigation } from './../redux/Action/index';
 
-export default class Message extends React.Component {
+
+
+class Message extends React.Component {
     static navigationOptions = {
         tabBarLabel: "Message",
         tabBarIcon: ({ tintColor }) => {
-            return <Image source={require('./../images/iconMessage.png')} style={{ width: 34, height: 36,  tintColor: tintColor  }} />
+            return <Image source={require('./../images/iconMessage.png')} style={{ width: 34, height: 36, tintColor: tintColor }} />
         }
     };
 
-    listItem = (ListItems) => {
-        let items = ListItems.map((val, key) => {
+
+    listItems = (Items) => {
+        items = Items.map((val, key) => {
             return (
                 <ListItem avatar key={key} style={{ paddingBottom: 10 }}
                     onPress={() => this.props.navigation.navigate('screenChat')}>
@@ -39,6 +43,7 @@ export default class Message extends React.Component {
     }
 
     render() {
+
         return (
             <Container>
                 <Headers
@@ -51,8 +56,8 @@ export default class Message extends React.Component {
                 />
 
                 <Content>
-                    <List style={{ marginLeft: 0 }}>
-                        {this.listItem(ListItems)}
+                    <List>
+                        {this.listItems(this.props.contentMessges)}
                     </List>
                 </Content>
             </Container>
@@ -60,3 +65,9 @@ export default class Message extends React.Component {
         );
     }
 }
+
+
+const mapStateToProps = (state) => ({ contentMessges: state.contentMessge })
+
+
+export default connect(mapStateToProps, null)(Message)

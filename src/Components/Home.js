@@ -8,6 +8,8 @@ import Rating from 'react-native-rating'
 import { connect } from 'react-redux';
 import { actionToggleList } from './../redux/Action/index';
 
+
+
 let { width, height } = Dimensions.get('window');
 const images = {
     starFilled: require('../../assets/star_filled.png'),
@@ -89,6 +91,7 @@ class Home extends React.Component {
     );
 
     render() {
+     
         return (
             <Container>
                 <StatusBar hidden={true} />

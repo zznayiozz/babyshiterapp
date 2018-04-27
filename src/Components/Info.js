@@ -5,7 +5,8 @@ import {
     TouchableOpacity,
     Image,
     Dimensions,
-    StatusBar
+    StatusBar,
+    WebView
 } from 'react-native';
 import { Button, Header } from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -20,7 +21,7 @@ import { connect } from 'react-redux';
 class Info extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {   
+        this.state = {
             activeSlide: 1,   // Position of picture active
         }
     }
@@ -50,7 +51,7 @@ class Info extends React.Component {
     // Show icon Dot of Slider
     get pagination() {
         const { activeSlide } = this.state;
-        let {urlSlider} = this.props.contentInfo;
+        let { urlSlider } = this.props.contentInfo;
         return (
             <Pagination
                 dotsLength={urlSlider.length}
@@ -115,6 +116,10 @@ class Info extends React.Component {
         )
     }
 
+    sendmail = () => {
+        console.log('SendMail')
+    }
+
     // Render Component
     render() {
         let { urlSlider, title, descript } = this.props.contentInfo;
@@ -125,6 +130,8 @@ class Info extends React.Component {
             <View style={styles.container}>
                 <StatusBar hidden={true} />
                 <LinearGradient colors={['#fff', '#fff', '#ffdfe1']} style={styles.LinearGradient}>
+
+                  
                     {this.ComponentSlider()}
 
                     <View style={styles.Main}>

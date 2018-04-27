@@ -15,6 +15,7 @@ import SignUp from './src/Components/SignUp';
 import Chat from './src/Components/Chat';
 import Congratulations from './src/Components/Congratulations';
 
+
 import { Provider } from 'react-redux'
 import  store  from './src/redux/store';
 
@@ -51,7 +52,7 @@ let TabNavigatorConfigs = TabNavigator(
 );
 
 let routerConfigs = {
-
+	// screenSchedule: { screen: Schedule },
 	screenInfo: { screen: Info },
 	screenSearch: { screen: Search },
 	screenResult: { screen: Result },

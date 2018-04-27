@@ -379,8 +379,7 @@ export const Schedule = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderBottomWidth: 5,
-        backgroundColor: '#FADFE1',
-        borderBottomColor: '#FF7F88',
+       
     },
 
     ButtonPast: {
@@ -388,8 +387,19 @@ export const Schedule = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderBottomWidth: 5,
-        backgroundColor: '#D2E4F8',
-        borderBottomColor: '#274D7A',
+      
+    },
+
+    UpcommingText: {
+        fontSize: 12, color: '#707070', fontWeight: 'bold'
+    },
+
+    UpcommingButton: {
+        marginTop: 10,
+        height: 20,
+        paddingLeft: 20,
+        paddingRight: 20,
+        justifyContent: 'center',
     }
 
 });

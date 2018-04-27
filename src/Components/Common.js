@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Image, Dimensions, TouchableOpacity, TextInput } from 'react-native';
-import { Header, Text, Body, Icon, Button, Left, Right, Title, Footer, FooterTab, Thumbnail } from 'native-base';
-
+import { Header, Text, Body, Icon, Button, Left, Right, Title, Footer, FooterTab, Thumbnail, ListItem } from 'native-base';
+import { Schedule as styles } from './Styles/StyleHome';
 let { width } = Dimensions.get('window');
 
 export class Headers extends React.Component {
@@ -89,4 +89,52 @@ export class Input extends React.Component {
     }
 }
 
+export class Buttons extends React.Component {
+    render() {
+        return (
+            <Button block transparent style={[styles.ButtonUpcomming, this.props.background, this.props.style]}
+                onPress={this.props.onPress}>
+                <Text style={[{ fontWeight: 'bold' }, this.props.color]}> {this.props.name} </Text>
+            </Button>
+        )
+    }
+}
 
+export class ListItemUpcomming extends React.Component {
+    render() {
+        return (
+            <ListItem style={{ marginLeft: 0 }}>
+                <Body style={{ flex: 40, alignItems: 'center' }}>
+                    <Thumbnail source={this.props.source} />
+                    <Text style={styles.UpcommingText}>{this.props.title}</Text>
+                </Body>
+                <Body style={{ flex: 70 }}>
+                    <Text style={[styles.UpcommingText, { justifyContent: 'flex-start' }]}>{this.props.date}</Text>
+                    <Text style={styles.UpcommingText}>{this.props.time}</Text>
+                    <Text style={styles.UpcommingText}>{this.props.price}VNDx{this.props.timeWork} = {this.props.total}VND</Text>
+                    <Button onPress={this.props._onClick} rounded style={[styles.UpcommingButton, this.props.backgroundColor]}>
+                        <Text style={{ fontSize: 13, color: '#fff', fontWeight: 'bold' }}> {this.props.status} </Text>
+                    </Button>
+                </Body>
+            </ListItem>
+        )
+    }
+}
+
+export class ListItemPast extends React.Component {
+    render() {
+        return (
+            <ListItem style={{ marginLeft: 0 }}>
+                <Body style={{ flex: 40, alignItems: 'center' }}>
+                    <Thumbnail small source={this.props.source} />
+                    <Text style={styles.UpcommingText}>Kumar Pratik</Text>
+                </Body>
+                <Body style={{ flex: 70 }}>
+                    <Text style={[styles.UpcommingText, { justifyContent: 'flex-start' }]}>{this.props.date}</Text>
+                    <Text style={styles.UpcommingText}>{this.props.time}</Text>
+                    <Text style={styles.UpcommingText}>{this.props.price}VNDx{this.props.timeWork} = {this.props.total}VND</Text>
+                </Body>
+            </ListItem>
+        )
+    }
+}
